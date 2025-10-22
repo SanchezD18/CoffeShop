@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Coffee Shop</string>
+    <string name="coffee_shop">Coffee Shop</string>
+    <string name="cart">Carrito</string>
+    <string name="add_to_cart">Añadir al Carrito</string>
+    <string name="quantity">Cantidad</string>
+    <string name="price">Precio</string>
+    <string name="total">Total</string>
+    <string name="checkout">Proceder al Pago</string>
+    <string name="empty_cart">Tu carrito está vacío</string>
+    <string name="remove">Eliminar</string>
+    <string name="back">Volver</string>
+    <string name="coffee_americano">Café Americano</string>
+    <string name="coffee_americano_desc">Café negro fuerte y aromático</string>
+    <string name="cappuccino">Cappuccino</string>
+    <string name="cappuccino_desc">Café con leche espumosa y cacao</string>
+    <string name="latte">Latte</string>
+    <string name="latte_desc">Café con leche vaporizada y arte latte</string>
+    <string name="mocha">Mocha</string>
+    <string name="mocha_desc">Café con chocolate y leche</string>
+    <string name="frappe">Frappé</string>
+    <string name="frappe_desc">Café frío batido con hielo</string>
+    <string name="iced_coffee">Iced Coffee</string>
+    <string name="iced_coffee_desc">Café helado refrescante</string>
+    <string name="croissant">Croissant</string>
+    <string name="croissant_desc">Panadería francesa recién horneada</string>
+</resources>
