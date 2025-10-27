@@ -32,6 +32,7 @@ fun RatingBar(
                 contentDescription = null,
                 tint = starsColor,
                 modifier = Modifier
+                    .size(40.dp)
                     .clickable {
                         onRatingChanged(i)
                     })
@@ -62,7 +63,7 @@ fun InteractiveRatingBar(
                     currentRating = starRating.toFloat()
                     onRatingChange(currentRating)
                 },
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(32.dp)
             ) {
                 Icon(
                     imageVector = if (isFilled) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
@@ -71,7 +72,7 @@ fun InteractiveRatingBar(
                         MaterialTheme.colorScheme.primary 
                     else 
                         MaterialTheme.colorScheme.outline,
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier.size(32.dp)
                 )
             }
         }

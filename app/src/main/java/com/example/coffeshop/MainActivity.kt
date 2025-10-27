@@ -43,14 +43,7 @@ fun CoffeeShopApp() {
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { 
-                    Text(
-                        text = when (currentScreen) {
-                            "coffee_shops" -> "Cafeterías"
-                            "coffee_shop_detail" -> "Detalle"
-                            else -> "Cafeterías"
-                        }
-                    )
+                title = {
                 }
             )
         }
@@ -64,10 +57,8 @@ fun CoffeeShopApp() {
                             currentScreen = "coffee_shop_detail"
                         },
                         onShareClick = {
-                            // TODO: Implementar funcionalidad de compartir
                         },
                         onAlbumClick = {
-                            // TODO: Implementar funcionalidad de álbum
                         }
                     )
                 }

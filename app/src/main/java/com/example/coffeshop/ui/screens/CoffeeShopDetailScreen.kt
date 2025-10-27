@@ -33,7 +33,6 @@ fun CoffeeShopDetailScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        // Top App Bar
         TopAppBar(
             title = { Text(coffeeShop.titulo) },
             navigationIcon = {
@@ -42,114 +41,7 @@ fun CoffeeShopDetailScreen(
                 }
             }
         )
-        
-        // Coffee Shop Image
-        Image(
-            painter = painterResource(id = coffeeShop.imageRes),
-            contentDescription = coffeeShop.titulo,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .padding(16.dp)
-                .clip(RoundedCornerShape(12.dp)),
-            contentScale = ContentScale.Crop
-        )
-        
-        // Coffee Shop Details
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = coffeeShop.titulo,
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold
-            )
-            
-            Spacer(modifier = Modifier.height(8.dp))
-            
-            Text(
-                text = coffeeShop.subtit,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            
-            Spacer(modifier = Modifier.height(16.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    RatingBar(
-                        modifier = Modifier.padding(end = 8.dp)
-                    )
-                    Text(
-                        text = coffeeShop.rating.toString(),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-                
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(10.dp)
-                            .clip(RoundedCornerShape(5.dp))
-                            .background(
-                                if (coffeeShop.isOpen) 
-                                    MaterialTheme.colorScheme.primary 
-                                else 
-                                    MaterialTheme.colorScheme.error
-                            )
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                }
-            }
-            
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Text(
-                text = "Descripción",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
-            )
-            
-            Spacer(modifier = Modifier.height(8.dp))
-            
-            Text(
-                text = coffeeShop.description,
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * 1.2
-            )
-            
-            Spacer(modifier = Modifier.height(32.dp))
-            
-            // Action Buttons
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                OutlinedButton(
-                    onClick = { /* TODO: Implementar navegación */ },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text("Ver en Mapa")
-                }
-                
-                Button(
-                    onClick = { /* TODO: Implementar llamada */ },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text("Llamar")
-                }
-            }
         }
     }
-}
+
