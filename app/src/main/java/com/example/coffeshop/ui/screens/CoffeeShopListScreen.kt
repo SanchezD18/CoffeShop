@@ -1,21 +1,19 @@
 package com.example.coffeshop.ui.screens
 
+import android.os.strictmode.CredentialProtectedWhileLockedViolation
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -30,76 +28,21 @@ import com.example.coffeshop.ui.components.RatingBar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CoffeeShopListScreen(
-    onCoffeeShopClick: (CoffeeShop) -> Unit = {},
-    onShareClick: () -> Unit = {},
-    onAlbumClick: () -> Unit = {}
+    onCoffeeShopClick: (CoffeeShop) -> Unit = {}
 ) {
     val coffeeShops = remember { CoffeeShopRepository.getCoffeeShops() }
-    var expanded by remember { mutableStateOf(false) }
-    Column(
+    
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Cafeterías",
-                style = MaterialTheme.typography.headlineLarge,
-                fontWeight = FontWeight.Bold
+        items(coffeeShops) { coffeeShop ->
+            CoffeeShopCard(
+                coffeeShop = coffeeShop,
+                onClick = { onCoffeeShopClick(coffeeShop) }
             )
-
-            Box {
-                IconButton(onClick = { expanded = true }) {
-                    Icon(
-                        Icons.Default.MoreVert,
-                        contentDescription = "Opciones",
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false }
-                ) {
-                    DropdownMenuItem(
-                        text = { Text("Compartir") },
-                        onClick = {
-                            expanded = false
-                            onShareClick()
-                        },
-                        leadingIcon = {
-                            Icon(Icons.Default.Share, contentDescription = null)
-                        }
-                    )
-                    DropdownMenuItem(
-                        text = { Text("Álbum") },
-                        onClick = {
-                            expanded = false
-                            onAlbumClick()
-                        },
-                        leadingIcon = {
-                            Icon(Icons.Default.Lock, contentDescription = null)
-                        }
-                    )
-                }
-            }
-        }
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(coffeeShops) { coffeeShop ->
-                CoffeeShopCard(
-                    coffeeShop = coffeeShop,
-                    onClick = { onCoffeeShopClick(coffeeShop) }
-                )
-            }
         }
     }
 }
@@ -112,16 +55,18 @@ fun CoffeeShopCard(
 ) {
     var rating by remember { mutableIntStateOf(0) }
     Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondary
+        ),
         onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
-            .height(400.dp),
+            .height(400.dp)
     ) {
         Column (
             modifier = Modifier
                 .weight(1f),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
+            verticalArrangement = Arrangement.Top
         ) {
             Image(
                 painter = painterResource(id = coffeeShop.imageRes),
@@ -140,7 +85,8 @@ fun CoffeeShopCard(
                     fontFamily = AliviaRegularFont,
                     fontSize = 32.sp,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
+                    color = Color(0xFF000000)
                 )
 
                 Row(verticalAlignment = Alignment.CenterVertically){
@@ -168,7 +114,7 @@ fun CoffeeShopCard(
 
                     onClick = {}) {
                     Text(text = "Reserve",
-                        fontSize = 28.sp,)
+                        fontSize = 20.sp,)
                 }
 
             }

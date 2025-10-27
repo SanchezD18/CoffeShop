@@ -9,3 +9,4 @@ data class CoffeeShop(
     val rating: Float = 0f,
     val isOpen: Boolean = true
 )
+
