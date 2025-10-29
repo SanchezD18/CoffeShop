@@ -6,20 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.coffeshop.data.CoffeeShop
 import com.example.coffeshop.ui.screens.CoffeeShopDetailScreen
 import com.example.coffeshop.ui.screens.CoffeeShopListScreen
 import com.example.coffeshop.ui.theme.CoffeShopTheme
@@ -42,19 +39,28 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun CoffeeShopApp() {
     var currentScreen by remember { mutableStateOf("coffee_shops") }
-    var selectedCoffeeShop by remember { mutableStateOf<CoffeeShop?>(null) }
+    var selectedTitle by remember { mutableStateOf<String?>(null) }
     var expanded by remember { mutableStateOf(false) }
-    
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = { /* TODO: Implementar navegación hacia atrás */ }) {
-                Icon(Icons.Filled.Menu, contentDescription = null)}},
+                    if (currentScreen == "coffee_shops") {
+                        IconButton(onClick = {}) {
+                            Icon(Icons.Filled.Menu, contentDescription = null)
+                        }
+                    } else {
+                        IconButton(onClick = {
+                            currentScreen = "coffee_shops"
+                        }) {
+                            Icon(Icons.Default.Close, contentDescription = "Volver")
+                        }
+                    }
+                },
                 title = {
                     Text(
-                        text = "CoffeeShops",
+                        text = "CoffeShops",
                         style = MaterialTheme.typography.headlineLarge,
                         color = MaterialTheme.colorScheme.onPrimary
                     )
@@ -81,7 +87,6 @@ fun CoffeeShopApp() {
                                 text = { Text("Compartir") },
                                 onClick = {
                                     expanded = false
-                                    // TODO: Implementar funcionalidad de compartir
                                 },
                                 leadingIcon = {
                                     Icon(Icons.Default.Share, contentDescription = null)
@@ -91,7 +96,6 @@ fun CoffeeShopApp() {
                                 text = { Text("Álbum") },
                                 onClick = {
                                     expanded = false
-                                    // TODO: Implementar funcionalidad de álbum
                                 },
                                 leadingIcon = {
                                     Icon(Icons.Default.Lock, contentDescription = null)
@@ -107,19 +111,14 @@ fun CoffeeShopApp() {
             when (currentScreen) {
                 "coffee_shops" -> {
                     CoffeeShopListScreen(
-                        onCoffeeShopClick = { coffeeShop ->
-                            selectedCoffeeShop = coffeeShop
+                        onNavigate = { title ->
+                            selectedTitle = title
                             currentScreen = "coffee_shop_detail"
                         }
                     )
                 }
                 "coffee_shop_detail" -> {
-                    selectedCoffeeShop?.let { coffeeShop ->
-                        CoffeeShopDetailScreen(
-                            coffeeShop = coffeeShop,
-                            onBackClick = { currentScreen = "coffee_shops" }
-                        )
-                    }
+                    CoffeeShopDetailScreen(selectedTitle?: "CoffeShops")
                 }
             }
         }

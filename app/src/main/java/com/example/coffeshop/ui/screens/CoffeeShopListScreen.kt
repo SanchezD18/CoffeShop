@@ -1,6 +1,5 @@
 package com.example.coffeshop.ui.screens
 
-import android.os.strictmode.CredentialProtectedWhileLockedViolation
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
@@ -28,7 +27,7 @@ import com.example.coffeshop.ui.components.RatingBar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CoffeeShopListScreen(
-    onCoffeeShopClick: (CoffeeShop) -> Unit = {}
+    onNavigate: (String) -> Unit = {}
 ) {
     val coffeeShops = remember { CoffeeShopRepository.getCoffeeShops() }
     
@@ -41,7 +40,7 @@ fun CoffeeShopListScreen(
         items(coffeeShops) { coffeeShop ->
             CoffeeShopCard(
                 coffeeShop = coffeeShop,
-                onClick = { onCoffeeShopClick(coffeeShop) }
+                onClick = { onNavigate(coffeeShop.titulo) }
             )
         }
     }
@@ -63,11 +62,6 @@ fun CoffeeShopCard(
             .fillMaxWidth()
             .height(400.dp)
     ) {
-        Column (
-            modifier = Modifier
-                .weight(1f),
-            verticalArrangement = Arrangement.Top
-        ) {
             Image(
                 painter = painterResource(id = coffeeShop.imageRes),
                 contentDescription = coffeeShop.titulo,
@@ -81,9 +75,10 @@ fun CoffeeShopCard(
                 Text(
                     text = coffeeShop.titulo,
                     style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(start = 10.dp),
                     fontWeight = FontWeight.Bold,
                     fontFamily = AliviaRegularFont,
-                    fontSize = 32.sp,
+                    fontSize = 30.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     color = Color(0xFF000000)
@@ -92,7 +87,7 @@ fun CoffeeShopCard(
                 Row(verticalAlignment = Alignment.CenterVertically){
                     RatingBar(
                         rating = rating,
-                        modifier = Modifier.padding(vertical = 4.dp),
+                        modifier = Modifier.padding(start = 10.dp, top = 6.dp),
                         onRatingChanged = { newRating ->
                             rating = newRating
                         }
@@ -105,12 +100,12 @@ fun CoffeeShopCard(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 20.sp,
                     maxLines = 1,
-                    modifier = Modifier.padding(start = 0.dp, end = 100.dp, top = 10.dp)
+                    modifier = Modifier.padding(start = 12.dp, end = 0.dp, top = 10.dp)
                         .width(250.dp)
                 )
             Spacer(modifier = Modifier.height(5.dp))
                 HorizontalDivider()
-                TextButton(modifier = Modifier.padding(start = 0.dp, end = 240.dp, top = 2.dp),
+                TextButton(modifier = Modifier.padding(start = 0.dp, end = 0.dp, top = 2.dp),
 
                     onClick = {}) {
                     Text(text = "Reserve",
@@ -119,4 +114,4 @@ fun CoffeeShopCard(
 
             }
         }
-    }
+
