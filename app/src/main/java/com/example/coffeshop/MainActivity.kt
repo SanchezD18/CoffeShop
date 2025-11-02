@@ -17,8 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.coffeshop.ui.screens.CoffeeShopDetailScreen
-import com.example.coffeshop.ui.screens.CoffeeShopListScreen
 import com.example.coffeshop.ui.theme.CoffeShopTheme
 
 val AliviaRegularFont = FontFamily(Font(R.font.aliviaregular))

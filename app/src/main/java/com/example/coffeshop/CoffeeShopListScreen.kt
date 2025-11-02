@@ -1,4 +1,4 @@
-package com.example.coffeshop.ui.screens
+package com.example.coffeshop
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -19,10 +19,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.coffeshop.AliviaRegularFont
 import com.example.coffeshop.data.CoffeeShop
 import com.example.coffeshop.data.CoffeeShopRepository
-import com.example.coffeshop.ui.components.RatingBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -109,7 +107,7 @@ fun CoffeeShopCard(
 
                     onClick = {}) {
                     Text(text = "Reserve",
-                        fontSize = 20.sp,)
+                        fontSize = 30.sp,)
                 }
 
             }
